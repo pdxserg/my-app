@@ -1,7 +1,7 @@
 import { AddItemForm } from "common/components"
 import { useAppDispatch } from "common/hooks"
-import { addTaskTC } from "../../../model/tasks-reducer"
-import { DomainTodolist } from "../../../model/todolists-reducer"
+import { addTaskTC } from "../../../model/tasksSlice"
+import { DomainTodolist } from "../../../model/todolistsSlice"
 
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons"
 import { Tasks } from "./Tasks/Tasks"

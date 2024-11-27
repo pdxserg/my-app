@@ -14,7 +14,6 @@ const appSlice = createSlice({
     error: null as string | null,
   },
   reducers:(create)=>({
-
     changeTheme: create.reducer<{themeMode: ThemeMode}>((state, action)=>{
       state.themeMode= action.payload.themeMode
     }),

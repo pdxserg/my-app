@@ -1,6 +1,6 @@
 import { TaskPriority, TaskStatus } from "common/enums"
-import { addTaskAC, removeTaskAC, tasksReducer, TasksStateType, updateTaskAC } from "../tasks-reducer"
-import { addTodolistAC, removeTodolistAC } from "../todolists-reducer"
+import { addTaskAC, removeTaskAC, tasksReducer, TasksStateType, updateTaskAC } from "../tasksSlice"
+import { addTodolistAC, removeTodolistAC } from "../todolistsSlice"
 
 let startState: TasksStateType = {}
 
