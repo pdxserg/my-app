@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton"
 import LinearProgress from "@mui/material/LinearProgress"
 import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
-import { changeThemeAC } from "../../../app/appSlice"
+import { changeTheme } from "../../../app/appSlice"
 import { selectAppStatus, selectThemeMode } from "../../../app/appSelectors"
 import { useAppDispatch, useAppSelector } from "common/hooks"
 import { getTheme } from "common/theme"
@@ -22,7 +22,7 @@ export const Header = () => {
   const theme = getTheme(themeMode)
 
   const changeModeHandler = () => {
-    dispatch(changeThemeAC(themeMode === "light" ? "dark" : "light"))
+    dispatch(changeTheme({themeMode: themeMode === "light" ? "dark" : "light"}))
   }
 
   const logoutHandler = () => {

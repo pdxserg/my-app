@@ -31,12 +31,12 @@ export const authReducer = authSlice.reducer
 
 // thunks
 export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
-	dispatch(setAppStatus("loading"))
+	dispatch(setAppStatus({status:"loading"}))
 	authApi
 		.login(data)
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatus("succeeded"))
+				dispatch(setAppStatus({status:"succeeded"}))
 				dispatch(setIsLoggedIn({isLoggedIn: true}))
 				localStorage.setItem("sn-token", res.data.data.token)
 			} else {
@@ -49,12 +49,12 @@ export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
-	dispatch(setAppStatus("loading"))
+	dispatch(setAppStatus({status: "loading"}))
 	authApi
 		.logout()
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatus("succeeded"))
+				dispatch(setAppStatus({status:"succeeded"}))
 				dispatch(setIsLoggedIn({isLoggedIn: false}))
 				dispatch(clearTasksAC())
 				dispatch(clearTodolistsAC())
@@ -69,12 +69,12 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 }
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-	dispatch(setAppStatus("loading"))
+	dispatch(setAppStatus({status: "loading"}))
 	authApi
 		.me()
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatus("succeeded"))
+				dispatch(setAppStatus({status:"succeeded"}))
 				dispatch(setIsLoggedIn({isLoggedIn: true}))
 			} else {
 				handleServerAppError(res.data, dispatch)
