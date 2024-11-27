@@ -2,12 +2,12 @@ import {ResultCode} from "common/enums"
 import {handleServerAppError} from "common/utils/handleServerAppError"
 import {handleServerNetworkError} from "common/utils/handleServerNetworkError"
 import {Dispatch} from "redux"
-import {setAppStatusAC} from "../../../app/appSlice"
 import {clearTasksAC} from "../../todolists/model/tasks-reducer"
 import {clearTodolistsAC} from "../../todolists/model/todolists-reducer"
 import {authApi} from "../api/authAPI"
 import {LoginArgs} from "../api/authAPI.types"
 import {createSlice} from "@reduxjs/toolkit";
+import {setAppStatus} from "../../../app/appSlice";
 
 
 const authSlice = createSlice({
@@ -31,12 +31,12 @@ export const authReducer = authSlice.reducer
 
 // thunks
 export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
-	dispatch(setAppStatusAC("loading"))
+	dispatch(setAppStatus("loading"))
 	authApi
 		.login(data)
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatusAC("succeeded"))
+				dispatch(setAppStatus("succeeded"))
 				dispatch(setIsLoggedIn({isLoggedIn: true}))
 				localStorage.setItem("sn-token", res.data.data.token)
 			} else {
@@ -49,12 +49,12 @@ export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
-	dispatch(setAppStatusAC("loading"))
+	dispatch(setAppStatus("loading"))
 	authApi
 		.logout()
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatusAC("succeeded"))
+				dispatch(setAppStatus("succeeded"))
 				dispatch(setIsLoggedIn({isLoggedIn: false}))
 				dispatch(clearTasksAC())
 				dispatch(clearTodolistsAC())
@@ -69,12 +69,12 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 }
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-	dispatch(setAppStatusAC("loading"))
+	dispatch(setAppStatus("loading"))
 	authApi
 		.me()
 		.then((res) => {
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(setAppStatusAC("succeeded"))
+				dispatch(setAppStatus("succeeded"))
 				dispatch(setIsLoggedIn({isLoggedIn: true}))
 			} else {
 				handleServerAppError(res.data, dispatch)
