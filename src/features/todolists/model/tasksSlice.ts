@@ -18,42 +18,44 @@ export const tasksSlice = createSlice({
 	initialState: {} as TasksStateType,
 	reducers: (create) => {
 		return {
-			setTasks: create.reducer<{ todolistId: string; tasks: DomainTask[] }>(() => {
+			setTasks: create.reducer<{ todolistId: string; tasks: DomainTask[] }>((state, action) => {
+				const stateCopy = {...state}
+				stateCopy[action.payload.todolistId] = action.payload.tasks
+				return stateCopy
 			}),
 			removeTask: create.reducer<{ taskId: string; todolistId: string }>((state, action) => {
+				return {
+					...state,
+					[action.payload.todolistId]: state[action.payload.todolistId].filter((t) => t.id !== action.payload.taskId)
+				}
 			}),
 			addTask: create.reducer<{ task: DomainTask }>((state, action) => {
-				// 			const newTask = action.payload.task
-// 			return {...state, [newTask.todoListId]: [newTask, ...state[newTask.todoListId]]}
+				const newTask = action.payload.task
+				return {...state, [newTask.todoListId]: [newTask, ...state[newTask.todoListId]]}
 			}),
-			updateTask: create.reducer<{
-				taskId: string;
-				todolistId: string;
-				domainModel: UpdateTaskDomainModel
-			}>((state, action) => {
-				//	return {
-// 				...state,
-// 				[action.payload.todolistId]: state[action.payload.todolistId].map((t) =>
-// 					t.id === action.payload.taskId
-// 						? {
-// 							...t,
-// 							...action.payload.domainModel,
-// 						}
-// 						: t,
-// 				),
-// 			}
+			updateTask: create.reducer<{ taskId: string; todolistId: string; domainModel:UpdateTaskDomainModel }>((state, action) => {
+					return {
+				...state,
+				[action.payload.todolistId]: state[action.payload.todolistId].map((t) =>
+					t.id === action.payload.taskId ?{...t, ...action.payload.domainModel}: t),
+			}
 			}),
+			removeTodolist:create.reducer(()=>{}),
 			addTodolist: create.reducer<{ todolist: Todolist }>((state, action) => {
-				// return {...state, [action.payload.todolist.id]: []}
+				return {...state, [action.payload.todolist.id]: []}
 			}),
-			clearTasks: create.reducer((state, action)=>{}),
+			clearTasks: create.reducer((state, action) => {
+			}),
 		}
 	},
+	extraReducers:(builder)=>{
+
+	}
 })
 
 
 export const tasksReducer = tasksSlice.reducer
-export const {setTasks, removeTask, addTask, updateTask,clearTasks} = tasksSlice.actions
+export const {setTasks, removeTask, addTask, updateTask, clearTasks} = tasksSlice.actions
 
 // export const _tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
 // 	switch (action.type) {
