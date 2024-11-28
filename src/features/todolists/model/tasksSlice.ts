@@ -46,13 +46,14 @@ export const tasksSlice = createSlice({
 			addTodolist: create.reducer<{ todolist: Todolist }>((state, action) => {
 				// return {...state, [action.payload.todolist.id]: []}
 			}),
+			clearTasks: create.reducer((state, action)=>{}),
 		}
 	},
 })
 
 
 export const tasksReducer = tasksSlice.reducer
-export const {setTasks, removeTask, addTask, updateTask} = tasksSlice.actions
+export const {setTasks, removeTask, addTask, updateTask,clearTasks} = tasksSlice.actions
 
 // export const _tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
 // 	switch (action.type) {
