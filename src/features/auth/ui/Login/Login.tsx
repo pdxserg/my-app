@@ -10,10 +10,10 @@ import { useAppDispatch, useAppSelector } from "common/hooks"
 import { getTheme } from "common/theme"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { selectThemeMode } from "../../../../app/appSelectors"
-import { loginTC } from "../../model/authSlice"
+ import { loginTC } from "../../model/authSlice"
 import { selectIsLoggedIn } from "../../model/authSelectors"
 import s from "./Login.module.css"
+import {selectThemeMode} from "../../../../app/appSlice";
 
 type Inputs = {
   email: string

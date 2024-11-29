@@ -6,6 +6,7 @@ import {RequestStatus, setAppStatus} from "../../../app/appSlice"
 import {todolistsApi} from "../api/todolistsApi"
 import {Todolist} from "../api/todolistsApi.types"
 import {createSlice} from "@reduxjs/toolkit";
+import {RootState} from "../../../app/store";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -54,8 +55,13 @@ export const todolistsSlice = createSlice({
 			}),
 		}
 	},
+	selectors:{
+		selectTodolists: state => state
+	}
 })
+// export const selectTodolists = (state: RootState) => state.todolists
 export const todolistsReducer = todolistsSlice.reducer
+export const {selectTodolists} = todolistsSlice.selectors
 export const {
 	removeTodolist,
 	addTodolist,
