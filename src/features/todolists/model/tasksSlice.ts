@@ -56,7 +56,6 @@ export const tasksSlice = createSlice({
 	},
 	selectors:{
 		selectTasks:(state) => state
-		// export const selectTasks = (state: RootState) => state.tasks
 	}
 })
 
