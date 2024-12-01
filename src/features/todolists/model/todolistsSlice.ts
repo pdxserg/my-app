@@ -49,7 +49,7 @@ export const todolistsSlice = createSlice({
 			setTodolists: create.reducer<{ todolists: Todolist[] }>((state, action) => {
 				return action.payload.todolists.map((tl) => ({...tl, filter: "all", entityStatus: "idle"}))
 			}),
-			clearTodolists: create.reducer((state, action) => {
+			clearTodolists: create.reducer(() => {
 				return []
 			}),
 		}
