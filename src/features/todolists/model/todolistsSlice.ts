@@ -6,7 +6,6 @@ import {RequestStatus, setAppStatus} from "../../../app/appSlice"
 import {todolistsApi} from "../api/todolistsApi"
 import {Todolist} from "../api/todolistsApi.types"
 import {createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../../../app/store";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
